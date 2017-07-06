@@ -67,7 +67,7 @@ function draw() {
   if(y + dy > canvas.height - ballRadius) {
     if(x > paddleX && x < paddleX + paddleWidth) {
       // If paddle color and ball color match, update score and make ball disappear
-      if (colorArray[paddleColorIndex] === "#0095DD") {
+      if (colorArray[paddleColorIndex] === ballColor) {
         // Shrink paddle
         if (paddleWidth > 60) {
           paddleWidth -= 10;
@@ -79,7 +79,9 @@ function draw() {
         x = generateRandomNumber();
         y = 0;
         //dx = 2; // This will be a random x value to determine placement of the ball
-        dy -= 1; // Speed of ball dropping
+        if (dy > -6) {
+          dy -= 1; // Speed of ball dropping
+        }
       } else {
         lives--;
         y = 0;
