@@ -1,3 +1,5 @@
+// The ball is not recentering when paddle color doesn't match ball color, why?
+
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
     
@@ -8,15 +10,17 @@ var dy = -1; // Speed of ball falling
     
 var ballRadius = 10;
     
-var paddleHeight = 4;
+var paddleHeight = 6;
 var paddleWidth = 100;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var paddleY = (canvas.height - paddleHeight); 
 var colorArray = [
-  "#0095DD", "#8a00e0", "#e00000"
+  "#12A5F4", "#FF7900", "#00B22D"
   ];
 var paddleColorIndex = 0;
 var ballColorIndex = 0;
+var ballColorIndex = 0;
+
 var ballColor = colorArray[ballColorIndex];
     
 var rightPressed = false;
@@ -25,6 +29,8 @@ var upPressed = false;
 var downPressed = false;
 var spacePressed = false;
 
+var hasGameStarted = false;
+
 var score = 0;
 var lives = 3;
 
@@ -32,7 +38,7 @@ var lives = 3;
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-  ctx.fillStyle = ballColor;
+  ctx.fillStyle = colorArray[ballColorIndex];
   ctx.fill();
   ctx.closePath();
 }
@@ -45,19 +51,24 @@ function drawPaddle() {
 }
 function drawScore() {
   ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = colorArray[ballColorIndex];
   ctx.fillText("Score: " + score, 8, 20);
 }
 function drawLives() {
   ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = colorArray[ballColorIndex];
   ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
+
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // clears the canvas
+	// Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	canvas.style.border = "2px solid" + ballColor;
+	
+	// Don't draw until Start is pressed
   drawBall();
   drawPaddle();
-  //collisionDetection();
   drawScore();
   drawLives();
   //x += dx; // This will be a random x value to determine placement of the ball
@@ -106,21 +117,11 @@ function draw() {
     }
   }
   
-  //
+  // Paddle movement
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
     paddleX += 7;
   } else if (leftPressed && paddleX > 0) {
     paddleX -= 7;
-  } 
-  /*
-  else if (upPressed && paddleY > 0) {
-    paddleY -= 4;
-  } else if (downPressed && paddleY < canvas.height - paddleHeight) {
-    paddleY += 4;
-  }
-  */
-  else if (spacePressed) {
-    console.log("Space Pressed");
   }
   
   requestAnimationFrame(draw); // we are giving control of the framerate back to the browser
@@ -146,8 +147,9 @@ function keyDownHandler(e) {
     upPressed = true;
   } else if (e.keyCode === 40) {
     downPressed = true;
-  } else if (e.keyCode === 32) {  
-    paddleColorIndex = (paddleColorIndex + 1) % (colorArray.length);
+  } else if (e.keyCode === 32) { 
+		// Change the color of the paddle, score and lives when spacePressed
+    paddleColorIndex = (paddleColorIndex + 1) % colorArray.length;
     spacePressed = true;
   }
 }
@@ -164,8 +166,20 @@ function keyUpHandler(e) {
     spacePressed = false;
   }
 }
+// Start game by clicking
+function clickHandler(e) {
+	if (e.target) {
+		if (!hasGameStarted) {
+			draw();
+			hasGameStarted = true;
+		} else if (hasGameStarted) {
+			// Do nothing
+		}
+	}
+}
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("click", clickHandler, false);
 
 /*
 // Mouse controls
@@ -177,12 +191,7 @@ function mouseMoveHandler(e) {
 }
 document.addEventListener("mousemove", mouseMoveHandler, false);
 */
-
-function collisionDetection() {
-  
-}
-
-    
-draw(); // draw function is called every 10 milliseconds or until we stop it
+//draw(); // draw function is called every 10 milliseconds or until we stop it
+ 
 
 //Technically, we will be painting the ball on the screen, clearing it and then painting it again in a slightly different position every frame to make the impression of movement — just like how movement works with the movies.

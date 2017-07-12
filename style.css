@@ -3,7 +3,59 @@
   margin: 0; 
 }
 canvas {
-  background: #eee;
+  background: #fff;
   display: block;
-  margin: 0 auto; 
+  margin: 0 auto;
+}
+h1, p {
+	text-align: center;
+}
+h1 {
+	font-family: 'Luckiest Guy', cursive;
+}
+p {
+	font-family: 'Catamaran', sans-serif;
+	color: #c9c9c9;
+}
+.primary-color {
+	color: #12A5F4;
+}
+.secondary-color {
+	color: #FF7900;
+}
+.third-color {
+	color: #00B22D;
+}
+
+/*
+#927B51, #EF2A2A, #12A5F4, #00B22D, #FF7900, #FBB36B
+*/
+
+.rainbow {
+   /* Chrome, Safari, Opera */
+  -webkit-animation: rainbow 2.5s infinite; 
+  /* Internet Explorer */
+  -ms-animation: rainbow 2.5s infinite;
+  /* Standar Syntax */
+  animation: rainbow 2.5s infinite; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+	33%{color: #12A5F4;}
+	66%{color: #FF7900;}
+	100%{color: #00B22D;}
+}
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+	33%{color: #12A5F4;}
+	66%{color: #FF7900;}
+	100%{color: #00B22D;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+	33%{color: #12A5F4;}
+	66%{color: #FF7900;}
+	100%{color: #00B22D;}
 }
