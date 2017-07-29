@@ -1,6 +1,6 @@
 * {
   padding: 0;
-  margin: 0; 
+  margin: 0;
 }
 canvas {
   background: #fff;
@@ -12,6 +12,7 @@ h1, p {
 }
 h1 {
 	font-family: 'Luckiest Guy', cursive;
+  margin-top: 6px;
 }
 p {
 	font-family: 'Catamaran', sans-serif;
@@ -33,11 +34,11 @@ p {
 
 .rainbow {
    /* Chrome, Safari, Opera */
-  -webkit-animation: rainbow 2.5s infinite; 
+  -webkit-animation: rainbow 2.5s infinite;
   /* Internet Explorer */
   -ms-animation: rainbow 2.5s infinite;
   /* Standar Syntax */
-  animation: rainbow 2.5s infinite; 
+  animation: rainbow 2.5s infinite;
 }
 
 /* Chrome, Safari, Opera */
