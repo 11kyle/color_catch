@@ -2,18 +2,18 @@
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-    
+
 var x = canvas.width / 2;
 var y = 0;
 var dx = 2;
 var dy = -1; // Speed of ball falling
-    
+
 var ballRadius = 10;
-    
+
 var paddleHeight = 6;
 var paddleWidth = 100;
 var paddleX = (canvas.width - paddleWidth) / 2;
-var paddleY = (canvas.height - paddleHeight); 
+var paddleY = (canvas.height - paddleHeight);
 var colorArray = [
   "#12A5F4", "#FF7900", "#00B22D"
   ];
@@ -22,7 +22,7 @@ var ballColorIndex = 0;
 var ballColorIndex = 0;
 
 var ballColor = colorArray[ballColorIndex];
-    
+
 var rightPressed = false;
 var leftPressed = false;
 var upPressed = false;
@@ -34,7 +34,7 @@ var hasGameStarted = false;
 var score = 0;
 var lives = 3;
 
-// remember that we count the y values from the top left, so the top edge starts at 0 and the bottom edge is at 480 pixels, the Canvas' height 
+// remember that we count the y values from the top left, so the top edge starts at 0 and the bottom edge is at 480 pixels, the Canvas' height
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -63,9 +63,9 @@ function drawLives() {
 function draw() {
 	// Clear the canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-	
+
 	canvas.style.border = "2px solid" + ballColor;
-	
+
 	// Don't draw until Start is pressed
   drawBall();
   drawPaddle();
@@ -116,14 +116,14 @@ function draw() {
       }
     }
   }
-  
+
   // Paddle movement
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
     paddleX += 7;
   } else if (leftPressed && paddleX > 0) {
     paddleX -= 7;
   }
-  
+
   requestAnimationFrame(draw); // we are giving control of the framerate back to the browser
 }
 
@@ -147,7 +147,7 @@ function keyDownHandler(e) {
     upPressed = true;
   } else if (e.keyCode === 40) {
     downPressed = true;
-  } else if (e.keyCode === 32) { 
+  } else if (e.keyCode === 32) {
 		// Change the color of the paddle, score and lives when spacePressed
     paddleColorIndex = (paddleColorIndex + 1) % colorArray.length;
     spacePressed = true;
@@ -192,6 +192,6 @@ function mouseMoveHandler(e) {
 document.addEventListener("mousemove", mouseMoveHandler, false);
 */
 //draw(); // draw function is called every 10 milliseconds or until we stop it
- 
+
 
 //Technically, we will be painting the ball on the screen, clearing it and then painting it again in a slightly different position every frame to make the impression of movement — just like how movement works with the movies.
