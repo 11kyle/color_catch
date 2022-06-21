@@ -37,7 +37,7 @@ p {
   -webkit-animation: rainbow 2.5s infinite;
   /* Internet Explorer */
   -ms-animation: rainbow 2.5s infinite;
-  /* Standar Syntax */
+  /* Standard Syntax */
   animation: rainbow 2.5s infinite;
 }
 
@@ -54,7 +54,7 @@ p {
 	100%{color: #00B22D;}
 }
 
-/* Standar Syntax */
+/* Standard Syntax */
 @keyframes rainbow{
 	33%{color: #12A5F4;}
 	66%{color: #FF7900;}
